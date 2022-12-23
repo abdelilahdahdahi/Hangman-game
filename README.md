@@ -1,2 +1,2 @@
-# impiccato-game
-Impiccato game made in C++ when I was in college
+# Hangman game 
+Made in C++ when I was in college 
