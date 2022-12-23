@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string.h>
 using namespace std;
+
 const int NUM_MAX_CARATTERI=21;
 const int NUM_MAX_ERRORI=8;
-char parola[NUM_MAX_CARATTERI+1];// mettiamo una posizione in più per \0
-char suggerimento[NUM_MAX_CARATTERI+1];// mettiamo una posizione in più per \0
+char parola[NUM_MAX_CARATTERI+1]; // mettiamo una posizione in più perchè gli array iniziano da 0
+char suggerimento[NUM_MAX_CARATTERI+1]; // mettiamo una posizione in più pure qua
 
 const char* corpoImpiccato[]={
   " |\n",
@@ -17,20 +18,25 @@ const char* corpoImpiccato[]={
   " \\\n"
 };
 
-/*costruiamo il suggerimento da mostrare al giocatore
-all'inizio devo mettere tanti _ quante sono le lettere della parola misteriosa*/
+/* 
+costruiamo il suggerimento da mostrare al giocatore
+all'inizio devo mettere tanti spazi '_' quante sono le 
+lettere della parola misteriosa
+*/
 void creaSuggerimento(){
   for(int pos=0; pos < strlen(parola); pos++){
     suggerimento[pos]='_';
   }
   suggerimento[strlen(parola)]='\0';
 }
-/*nascondi deve scrollare il testo per nascondere la parola inserita*/
+
+/* nascondi deve scrollare il testo velocemente per nascondere la parola inserita */
 void nascondi(){
   for(int conta=100; conta > 0; conta--){
     cout << endl;
   }
 }
+
 /* il primo giocatore deve inserire la parola che il secondo giocatore deve indovinare*/
 void scegliLaParolaDaIndovinare(){
   cout << "inserisci la parola da indovinare: ";
@@ -38,6 +44,7 @@ void scegliLaParolaDaIndovinare(){
   nascondi();
   creaSuggerimento();
 }
+
 /* controlla se il giocatore ha indovinato TUTTE le lettere della parola segreta*/
 void controllaVittoria(){
   bool finito=false;
@@ -46,9 +53,10 @@ void controllaVittoria(){
       return;
     }
   }
-  cout << "Hai indovinato la parola segreta: " << suggerimento << " ed hai vinto!" <<endl;
+  cout << "Hai indovinato la parola segreta, ovvero: " << suggerimento << " ed hai vinto!" <<endl;
   exit(0);
 }
+
 /* devo leggere una lettera e controllare se è presente nella parola*/
 bool giocaUnaVolta(){
   cout << "suggerimento: " << suggerimento << endl;
@@ -66,9 +74,9 @@ bool giocaUnaVolta(){
   if(trovata){
     controllaVittoria();
   }
-
 return trovata;  
 }
+
 /* devo leggere più lettere e controllare se sono presenti nella parola fino a quando:
 a) indovina l'intera parola
 b) si compone il corpo dell'impiccato*/
@@ -88,6 +96,6 @@ void gioca(){
   cout << "Non hai indovinato la parola segreta: " << parola << " ed hai perso!" << endl;
 }
 int main() {
-  scegliLaParolaDaIndovinare();// camel case
+  scegliLaParolaDaIndovinare(); //camel case
   gioca();
 }
